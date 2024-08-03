@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void mark_island(vector<vector<char>>& grid,int i,int j,int col,int row){
+        if(i<0 || i>=col || j<0 || j>=row || grid[i][j]!='1')
+         return;
+        grid[i][j]='2'; 
+         mark_island(grid,i+1,j,col,row);
+         mark_island(grid,i-1,j,col,row);
+         mark_island(grid,i,j+1,col,row);
+         mark_island(grid,i,j-1,col,row);
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int num_island=0;
+        int col=grid.size();
+        if(col==0)
+         return 0;
+        int row=grid[0].size();
+        for(int i=0;i<col;i++){
+            for(int j=0;j<row;j++){
+                if(grid[i][j]=='1'){
+                    mark_island(grid,i,j,col,row);
+                    num_island++;
+                }
+            }
+        }
+        return num_island;
+    }
+};
